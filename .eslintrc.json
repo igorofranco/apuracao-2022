@@ -1,0 +1,33 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
+    "standard"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": [
+    "react",
+    "@typescript-eslint"
+  ],
+  "rules": {
+    "semi": ["error", "always"],
+    "react/jsx-props-no-multi-spaces": "error",
+    "react/jsx-one-expression-per-line": "error",
+    "react/jsx-wrap-multilines": "error",
+    "react/jsx-indent": ["error", 2],
+    "react/jsx-equals-spacing": "error",
+    "react/jsx-closing-bracket-location": "error",
+    "react/jsx-no-useless-fragment": "error"
+  }
+}
