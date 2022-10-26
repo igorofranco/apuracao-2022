@@ -4,12 +4,12 @@ export interface Candidato {
   'n': string; // '13'
   'nm': string; // 'LULA'
   'cc': string; // 'PT - Federação Brasil da Esperança - FE BRASIL (PT\/PC do B\/PV) \/ SOLIDARIEDADE \/ Federação PSOL REDE (PSOL\/REDE) \/ PSB \/ AGIR \/ AVANTE \/ PROS'
-  'nv': string // 'GERALDO ALCKMIN'
-  'e': string // 'n'
-  'st': string // ''
-  'dvt': string // 'Válido'
-  'vap': string // '0'
-  'pvap': string // '00,00'
+  'nv': string; // 'GERALDO ALCKMIN'
+  'e': 's' | 'n' | string;
+  'st': string; // ''
+  'dvt': string; // 'Válido'
+  'vap': string; // '0'
+  'pvap': string; // '00,00'
 }
 
 export interface TseResponse {

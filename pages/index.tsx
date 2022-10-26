@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Candidato, TseResponse } from '../types/tse-response';
 import style from '../styles/Home.module.scss';
+import Head from 'next/head';
 
 export default function Home () {
   const [data, setData] = useState<TseResponse>();
@@ -36,7 +37,7 @@ export default function Home () {
     fetchData();
     const interval = setInterval(() => {
       fetchData();
-    }, 60000);
+    }, 15000);
     return () => {
       clearInterval(interval);
     };
@@ -57,29 +58,66 @@ export default function Home () {
 
   return (
     <main className={style.root}>
+      <Head>
+        <title>
+          Eleições 2022 - Segundo Turno
+        </title>
+        <meta charSet='utf-8' />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:site" content="@IgorSPN" />
+        <meta name="twitter:creator" content="@IgorSPN" />
+        <meta property="og:url" content="https://segundoturno2022.tk/" />
+        <meta property="og:title" content="Eleições 2022 - Segundo Turno" />
+        <meta property="title" content="Eleições 2022 - Segundo Turno" />
+        <meta property="og:description" content="Acompanhe a apuração das eleições de 2022 como se fosse um placar." />
+        <meta property="description" content="Acompanhe a apuração das eleições de 2022 como se fosse um placar." />
+        <meta property="og:site_name" content="Eleições 2022 - Segundo Turno"/>
+        <meta property="og:image" itemProp="image" content="https://segundoturno2022.tk/cover.jpg" />
+        <meta property="og:type" content="website" />
+      </Head>
       <main>
         {[lula, bozo].map(c => {
+          const percentage = +c.pvap.replace(',', '.');
           return (
-            <section key={`candidato-${c.n}`}>
-              <h2>
-                {c.nm.match(/bolsonaro|lula/i) || c.nm}
-              </h2>
-              <div>
-                {c.pvap}
-                %
-              </div>
+            <section
+              key={`candidato-${c.n}`}
+              style={{
+                backgroundColor: +c.n === 13 ? '#660a0a' : '#0a1e66',
+                width: percentage ? `${percentage}%` : '50%'
+              }}
+            >
+              <header>
+                <img
+                  src={`${c.nm.match(/lula|bolsonaro/i)}.${+c.n === 13 ? 'jpeg' : 'webp'}`}
+                  alt={`avatar-${c.nm.match(/lula|bolsonaro/i)}`}
+                  title={`${c.vap || 0} votos apurados`}
+                  style={{
+                    boxShadow: c.e.match(/s/gi) ? '0 0 1rem 1rem rgb(0 255 0 / .5)' : 'unset'
+                  }}
+                />
+              </header>
+              <main>
+                {`${c.pvap} %`}
+              </main>
             </section>
           );
         })}
       </main>
       <footer>
-        <div title={`${data?.st} / ${data?.s} seções totalizadas`}>
-          {`${data?.pst || '0,00'}% das seções totalizadas`}
-        </div>
-        <div>
-          {'Última atualização: '}
-          {data?.hg || '??:??:??'}
-        </div>
+        <main>
+          <div title={`${data?.st} / ${data?.s} seções totalizadas`}>
+            <strong>
+              {`${data?.pst || '?,??'}%`}
+            </strong>
+            {' das seções totalizadas'}
+          </div>
+          <div>
+            {'Última atualização: '}
+            <strong>
+              {data?.hg || '??:??:??'}
+            </strong>
+          </div>
+        </main>
       </footer>
     </main>
   );

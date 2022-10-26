@@ -1,4 +1,95 @@
+@mixin for-laptop{
+  @media only screen and (min-width: 860px) and (max-width: 1399px){
+    @content
+  }
+}
+@mixin for-desktop-up{
+  @media only screen and (min-width: 1400px){
+    @content
+  }
+}
+
 main.root{
-  > main{}
-  > footer{}
+  height: 100vh;
+  user-select: none;
+  background-color: #660a0a;
+  > main{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    > section{
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      color: #eee;
+
+      @include for-laptop{
+        justify-content: center;
+      }
+      @include for-desktop-up{
+        gap: 3rem;
+        justify-content: center;
+      }
+
+      > header{
+        margin-top: 4rem;
+        @include for-laptop{
+          margin-top: 0;
+        }
+        @include for-desktop-up{
+          margin-top: 0;
+        }
+        > img{
+          width: 5rem;
+          max-width: 100%;
+          height: 5rem;
+          object-fit: cover;
+          border-radius: 50%;
+
+          @include for-laptop{
+            width: 16rem;
+            max-width: 16rem;
+            height: 16rem;
+          }
+          @include for-desktop-up{
+            width: 20rem;
+            max-width: 20rem;
+            height: 20rem;
+          }
+        }
+      }
+      > main{
+        font-weight: 700;
+        font-size: 1.3rem;
+
+        @include for-laptop{
+          font-size: 6rem;
+        }
+        @include for-desktop-up{
+          font-size: 8rem;
+        }
+      }
+    }
+  }
+  > footer{
+    width: 100%;
+    position: fixed;
+    bottom: 2rem;
+    display: flex;
+    justify-content: center;
+    > main{
+      padding: 1rem 2rem;
+      background-color: #eee;
+      opacity: .9;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: .25rem;
+      border-radius: .5rem;
+      box-shadow: 0 .25rem 1rem rgb(0 0 0 / .75);
+    }
+  }
 }
