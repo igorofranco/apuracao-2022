@@ -1,10 +1,15 @@
-
 # Apuração 2022 - Segundo Turno
 
 Projeto web para a apuração do segundo turno das eleições de 2022.
 
-É necessário ter o node versão `18.12.0` ou superior.
+Acesse [AQUI](https://segundoturno2022.tk/).
 
 ## Getting Started
 
-Rode `npm run dev` no terminal.
+Tendo o node versão `18.12.0` ou superior, rode `npm install`.
+
+Rode `npm run dev` no terminal e acesse
+`http://localhost:3000`para rodar localmente.
+
+Para servir em um servidor estático, rode `npm run build`,
+e a build estará na pasta `/build`.
