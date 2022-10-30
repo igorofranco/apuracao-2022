@@ -19,7 +19,7 @@ export default function Home () {
     vap: '0',
     pvap: '00,00'
   });
-  const [bozo, setBozo] = useState<Candidato>({
+  const [bolsonaro, setBolsonaro] = useState<Candidato>({
     seq: '2',
     sqcand: '280001618036',
     n: '22',
@@ -44,12 +44,12 @@ export default function Home () {
   }, []);
 
   function fetchData () {
-    axios.get('https://resultados.tse.jus.br/oficial/ele2022/545/dados-simplificados/br/br-c0001-e000545-r.json')
+    axios.get('https://segundoturno2022.tk/api/')
       .then(res => {
         const data:TseResponse = res.data;
         setData(data);
         setLula(data.cand.find(cand => +cand.n === 13) as Candidato);
-        setBozo(data.cand.find(cand => +cand.n === 22) as Candidato);
+        setBolsonaro(data.cand.find(cand => +cand.n === 22) as Candidato);
       })
       .catch((err) => {
         console.error(err);
@@ -76,7 +76,7 @@ export default function Home () {
         <meta property="og:type" content="website" />
       </Head>
       <main>
-        {[lula, bozo].map(c => {
+        {[lula, bolsonaro].map(c => {
           const percentage = +c.pvap.replace(',', '.');
           return (
             <section
@@ -105,13 +105,18 @@ export default function Home () {
       </main>
       <footer>
         <main>
+          <div>
+            Atualizando em tempo real.
+          </div>
           <div title={`${data?.st} / ${data?.s} seções totalizadas`}>
             <strong>
               {`${data?.pst || '?,??'}%`}
             </strong>
-            {' das seções totalizadas'}
+            {' das seções totalizadas.'}
           </div>
-          <div>
+          <div
+            title={`${data?.dg || '??/??/????'}`}
+          >
             {'Última atualização: '}
             <strong>
               {data?.hg || '??:??:??'}
